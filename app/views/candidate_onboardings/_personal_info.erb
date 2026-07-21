@@ -1,0 +1,32 @@
+<section class="card mb-3">
+  <div class="card-body">
+    <h2 class="h5 mb-3">Personal details</h2>
+    <div class="row g-3">
+      <div class="col-md-6"><%= form.label :first_name, class: "form-label" %><%= form.text_field :first_name, class: "form-control", required: true %></div>
+      <div class="col-md-6"><%= form.label :last_name, class: "form-label" %><%= form.text_field :last_name, class: "form-control", required: true %></div>
+      <div class="col-md-6"><%= form.label :email, class: "form-label" %><%= form.email_field :email, class: "form-control", required: true %></div>
+      <div class="col-md-6"><%= form.label :phone_number, class: "form-label" %><%= form.telephone_field :phone_number, class: "form-control", required: true, placeholder: "+31 6 12345678" %></div>
+      <div class="col-md-6"><%= form.label :city, "City / residence", class: "form-label" %><%= form.text_field :city, class: "form-control", required: true %></div>
+      <div class="col-md-6"><%= form.label :country, class: "form-label" %><%= form.text_field :country, class: "form-control" %></div>
+    </div>
+
+    <div class="mt-4" data-controller="nested-form">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h3 class="h6 mb-0">Languages</h3>
+        <button type="button" class="btn btn-outline-primary btn-sm" data-action="nested-form#add">Add language</button>
+      </div>
+
+      <template data-nested-form-target="template">
+        <%= form.fields_for :candidate_languages, CandidateLanguage.new, child_index: "NEW_RECORD" do |language_form| %>
+          <%= render "language_fields", language_form: language_form %>
+        <% end %>
+      </template>
+
+      <div data-nested-form-target="items">
+        <%= form.fields_for :candidate_languages do |language_form| %>
+          <%= render "language_fields", language_form: language_form %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

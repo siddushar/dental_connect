@@ -1,0 +1,48 @@
+<div class="container py-4" data-controller="profile-form">
+  <div class="mb-4">
+    <p class="text-uppercase text-muted small mb-2">Step 2 of 2</p>
+    <h1 class="h3">Review and complete your profile</h1>
+    <p class="text-muted mb-0">Check the prefilled values, complete the missing fields, and save the profile.</p>
+  </div>
+
+  <% if @latest_document.present? %>
+    <div class="alert <%= @latest_document.parsing_status == "failed" ? "alert-warning" : "alert-info" %>">
+      CV parsing status: <%= @latest_document.parsing_status.humanize %>
+      <% if @latest_document.parsing_status == "failed" %>
+        - continue manually.
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @profile.errors.any? %>
+    <div class="alert alert-danger">
+      <strong>Please check these fields:</strong>
+      <ul class="mb-0">
+        <% @profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: @profile, url: candidate_onboarding_path, method: :patch do |form| %>
+    <%= render "personal_info", form: form %>
+    <%= render "preferences_info", form: form %>
+    <%= render "employment_info", form: form %>
+    <%= render "education_info", form: form %>
+    <%= render "work_experience_info", form: form %>
+    <%= render "skills_info", form: form %>
+    <%= render "availability_info", form: form %>
+    <%= render "additional_info", form: form %>
+
+    <div class="form-check mb-4">
+      <%= form.check_box :consent_accepted, class: "form-check-input", required: true %>
+      <%= form.label :consent_accepted, "I agree that my CV and profile information may be processed to create and improve my candidate profile.", class: "form-check-label" %>
+    </div>
+
+    <div class="d-flex gap-2 bg-white border-rounded p-3 sticky-bottom">
+      <%= form.submit "Save profile", class: "btn btn-primary" %>
+      <%= link_to "Upload another CV", new_candidate_onboarding_path, class: "btn btn-outline-secondary" %>
+    </div>
+  <% end %>
+</div>

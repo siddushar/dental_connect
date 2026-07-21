@@ -1,0 +1,12 @@
+<div class="row g-2 align-items-end mb-2" data-nested-form-target="item">
+  <%= language_form.hidden_field :_destroy, value: "0" %>
+  <div class="col-md-5">
+    <%= language_form.collection_select :language_id, @languages, :id, :name, { include_blank: "Select language" }, class: "form-select" %>
+  </div>
+  <div class="col-md-4">
+    <%= language_form.select :level, CandidateLanguage::LEVELS, { include_blank: "Level" }, class: "form-select" %>
+  </div>
+  <div class="col-md-3">
+    <button type="button" class="btn btn-outline-danger btn-sm" data-action="nested-form#remove">Remove</button>
+  </div>
+</div>

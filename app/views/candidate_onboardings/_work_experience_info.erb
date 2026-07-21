@@ -1,0 +1,22 @@
+<section class="card mb-3">
+  <div class="card-body" data-controller="nested-form">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="h5 mb-0">Work experience</h2>
+      <button type="button" class="btn btn-outline-primary btn-sm" data-action="nested-form#add">Add work experience</button>
+    </div>
+
+    <template data-nested-form-target="template">
+      <%= form.fields_for :work_experiences, WorkExperience.new, child_index: "NEW_RECORD" do |experience_form| %>
+        <%= render "work_experience_fields", experience_form: experience_form %>
+      <% end %>
+    </template>
+
+    <div data-nested-form-target="items">
+      <%= form.fields_for :work_experiences do |experience_form| %>
+        <%= render "work_experience_fields", experience_form: experience_form %>
+      <% end %>
+      </div>
+
+    <p class="form-text">The parser may mark uncertain company names as “Please check”.</p>
+  </div>
+</section>

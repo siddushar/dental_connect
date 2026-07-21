@@ -1,0 +1,17 @@
+<section class="card mb-3">
+  <div class="card-body">
+    <h2 class="h5 mb-3">Skills</h2>
+    <% @skills_by_group.each do |group, skills| %>
+      <div class="mb-3 skill-group" data-profile-form-target="skillGroup" data-group="<%= group %>">
+        <p class="fw-semibold mb-2"><%= group %></p>
+        <div class="d-flex flex-wrap gap-3">
+          <%= form.collection_check_boxes :skill_ids, skills, :id, :name do |box| %>
+            <div class="form-check"><%= box.check_box(class: "form-check-input") %><%= box.label(class: "form-check-label") %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <%= form.label :unknown_skills, "Unknown skills from CV", class: "form-label" %>
+    <%= form.text_field :unknown_skills, value: @profile.unknown_skills.to_a.join(", "), class: "form-control", placeholder: "Optional recruiter review notes" %>
+  </div>
+</section>

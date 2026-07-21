@@ -1,0 +1,20 @@
+<section class="card mb-3">
+  <div class="card-body">
+    <h2 class="h5 mb-3">Employment and compensation</h2>
+    <p class="fw-semibold mb-2">Desired employment type</p>
+    <div class="d-flex flex-wrap gap-3 mb-3" data-profile-form-target="employmentTypes">
+      <%= form.collection_check_boxes :employment_types, CandidateProfile::EMPLOYMENT_TYPES, :to_s, :to_s do |box| %>
+        <div class="form-check"><%= box.check_box(class: "form-check-input", data: { action: "change->profile-form#refresh" }) %><%= box.label(class: "form-check-label") %></div>
+      <% end %>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-6" data-profile-form-target="salary"><%= form.label :desired_gross_salary, class: "form-label" %><%= form.number_field :desired_gross_salary, class: "form-control", min: 0, step: 100 %></div>
+      <div class="col-md-6" data-profile-form-target="percentage"><%= form.label :desired_percentage, class: "form-label" %><%= form.number_field :desired_percentage, class: "form-control", min: 0, max: 100, step: 0.5 %></div>
+      <div class="col-md-6" data-profile-form-target="revenue"><%= form.label :average_daily_revenue, class: "form-label" %><%= form.number_field :average_daily_revenue, class: "form-control", min: 0, step: 50, placeholder: "e.g. 50, 100, 150" %></div>
+      <div class="col-md-6"><%= form.label :years_of_experience, "Years of dental experience", class: "form-label" %><%= form.number_field :years_of_experience, class: "form-control", min: 0, required: true %></div>
+      <div class="col-md-6" data-profile-form-target="bigStatus"><%= form.label :big_registration_status, class: "form-label" %><%= form.select :big_registration_status, CandidateProfile::BIG_STATUSES, { include_blank: "Select status" }, class: "form-select" %></div>
+      <div class="col-md-6" data-profile-form-target="bigNumber"><%= form.label :big_number, class: "form-label" %><%= form.text_field :big_number, class: "form-control" %></div>
+    </div>
+  </div>
+</section>

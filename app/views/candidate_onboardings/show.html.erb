@@ -1,0 +1,26 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card shadow-sm">
+        <div class="card-body p-4 p-md-5">
+          <p class="text-uppercase text-muted small mb-2">Submitted</p>
+          <h1 class="h3 mb-3">Candidate profile saved</h1>
+          <p class="text-muted">The recruitment team can now review this profile and CV.</p>
+
+          <dl class="row mb-4">
+            <dt class="col-sm-4">Name</dt>
+            <dd class="col-sm-8"><%= [@profile.first_name, @profile.last_name].compact.join(" ") %></dd>
+            <dt class="col-sm-4">Email</dt>
+            <dd class="col-sm-8"><%= @profile.email %></dd>
+            <dt class="col-sm-4">Desired function</dt>
+            <dd class="col-sm-8"><%= @profile.desired_job_function %></dd>
+            <dt class="col-sm-4">Availability</dt>
+            <dd class="col-sm-8"><%= @profile.available_working_days_list.join(", ") %> from <%= @profile.available_from %></dd>
+          </dl>
+
+          <%= link_to "Edit profile", edit_candidate_onboarding_path, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<section class="card mb-3">
+  <div class="card-body">
+    <h2 class="h5 mb-3">Job preferences</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <%= form.label :desired_job_function, class: "form-label" %>
+        <%= form.select :desired_job_function, CandidateProfile::JOB_FUNCTIONS, { include_blank: "Select function" }, class: "form-select", required: true, data: { profile_form_target: "function", action: "change->profile-form#refresh" } %>
+      </div>
+      <div class="col-md-6"><%= form.label :maximum_travel_time, "Maximum travel time in minutes", class: "form-label" %><%= form.number_field :maximum_travel_time, class: "form-control", min: 0, required: true %></div>
+      <div class="col-md-6"><%= form.label :search_status, class: "form-label" %><%= form.select :search_status, CandidateProfile::SEARCH_STATUSES, { include_blank: "Select status" }, class: "form-select", required: true %></div>
+      <div class="col-md-6"><%= form.label :reason_for_looking, class: "form-label" %><%= form.text_field :reason_for_looking, class: "form-control" %></div>
+    </div>
+
+    <p class="fw-semibold mt-4 mb-2">Preferred regions</p>
+    <div class="d-flex flex-wrap gap-3">
+      <%= form.collection_check_boxes :preferred_regions, CandidateProfile::REGIONS, :to_s, :to_s do |box| %>
+        <div class="form-check"><%= box.check_box(class: "form-check-input") %><%= box.label(class: "form-check-label") %></div>
+      <% end %>
+    </div>
+
+    <p class="fw-semibold mt-4 mb-2">Transport type</p>
+    <div class="d-flex flex-wrap gap-3">
+      <%= form.collection_check_boxes :transport_types, CandidateProfile::TRANSPORT_TYPES, :to_s, :to_s do |box| %>
+        <div class="form-check"><%= box.check_box(class: "form-check-input") %><%= box.label(class: "form-check-label") %></div>
+      <% end %>
+    </div>
+  </div>
+</section>

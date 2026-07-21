@@ -1,0 +1,19 @@
+<section class="card mb-3">
+  <div class="card-body">
+    <h2 class="h5 mb-3">Education</h2>
+    <%= form.fields_for :educations do |education_form| %>
+      <div class="border rounded p-3 mb-3">
+        <div class="row g-3">
+          <div class="col-md-6"><%= education_form.label :institution, class: "form-label" %><%= education_form.text_field :institution, class: "form-control" %></div>
+          <div class="col-md-6"><%= education_form.label :study, "Study / course", class: "form-label" %><%= education_form.text_field :study, class: "form-control" %></div>
+          <div class="col-md-6"><%= education_form.label :location, "City and country", class: "form-label" %><%= education_form.text_field :location, class: "form-control" %></div>
+          <div class="col-md-6"><%= education_form.label :level, class: "form-label" %><%= education_form.select :level, Education::LEVELS, { include_blank: "Select level" }, class: "form-select" %></div>
+          <div class="col-md-6"><%= education_form.label :start_date, class: "form-label" %><%= education_form.date_field :start_date, class: "form-control" %></div>
+          <div class="col-md-6"><%= education_form.label :end_date, class: "form-label" %><%= education_form.date_field :end_date, class: "form-control" %></div>
+        </div>
+        <div class="form-check mt-3"><%= education_form.check_box :_destroy, class: "form-check-input" %><%= education_form.label :_destroy, "Remove education", class: "form-check-label" %></div>
+      </div>
+    <% end %>
+    <p class="form-text">Save once and edit again to add another blank education row.</p>
+  </div>
+</section>

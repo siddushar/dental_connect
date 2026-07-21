@@ -1,0 +1,15 @@
+<section class="card mb-3">
+  <div class="card-body">
+    <h2 class="h5 mb-3">Availability</h2>
+    <p class="fw-semibold mb-2">Available working days</p>
+    <div class="d-flex flex-wrap gap-3 mb-3">
+      <%= form.collection_check_boxes :available_working_days, CandidateProfile::WORKING_DAYS, :to_s, :to_s do |box| %>
+        <div class="form-check"><%= box.check_box(class: "form-check-input") %><%= box.label(class: "form-check-label") %></div>
+      <% end %>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6"><%= form.label :available_from, class: "form-label" %><%= form.date_field :available_from, class: "form-control", required: true %></div>
+      <div class="col-md-6"><%= form.label :notice_period, class: "form-label" %><%= form.text_field :notice_period, class: "form-control", placeholder: "1 month" %></div>
+    </div>
+  </div>
+</section>
